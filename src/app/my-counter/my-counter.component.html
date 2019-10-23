@@ -1,6 +1,10 @@
+<div>id: {{ id$ | async }} {{ name$ | async }} </div>
+<br>
+
 <button id="increment" (click)="increment()">Increment</button>
 
 <div>Current Count: {{ count$ | async }}</div>
+<div>Current Count2: {{ count2$ | async }}</div>
 
 <button id="decrement" (click)="decrement()">Decrement</button>
 

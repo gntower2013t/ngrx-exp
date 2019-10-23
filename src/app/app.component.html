@@ -17,6 +17,15 @@
   </li>
 </ul> -->
 
-<app-my-counter></app-my-counter>
+<div>
+  <a [routerLink]="[ '/c1' ]">component1</a><br>
+  <a [routerLink]="[ '/c2' ]">component2</a>
+</div>
+<br>
 
-<router-outlet></router-outlet>
+<!-- <app-my-counter></app-my-counter> -->
+
+outlet:
+<div>
+  <router-outlet></router-outlet>
+</div>
