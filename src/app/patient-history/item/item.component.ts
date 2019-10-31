@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { AppState, getItem, StudyDetail } from 'src/app/+state/history.reducer';
+import { AppState, getItem, StudyDetail, getItemFull, ReqProcFull } from 'src/app/+state/history.reducer';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -12,14 +12,14 @@ import { Observable } from 'rxjs';
 export class ItemComponent implements OnInit {
 
   @Input() id: string
-  item$: Observable<StudyDetail>;
+  item$: Observable<ReqProcFull>;
 
   constructor(private store:Store<AppState>) { }
 
   ngOnInit() {
     console.log(`item init: ${this.id}`);
 
-    this.item$ = this.store.select(getItem(this.id))
+    this.item$ = this.store.select(getItemFull(this.id))
   }
 
   check() {

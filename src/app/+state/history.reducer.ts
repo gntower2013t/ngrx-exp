@@ -1,5 +1,5 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { createAction, props, createReducer, on, ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
+import { createAction, props, createReducer, on, ActionReducerMap, createFeatureSelector, createSelector, defaultMemoize } from '@ngrx/store';
 import { AppState as RootState } from "./reducers";
 
 export interface StudyDetail{
@@ -66,14 +66,34 @@ const getProcs = createSelector(getPh, s=>s.procs)
 
 export const getIds = createSelector(getStudies, sSelectors.selectIds)
 const getSEntities = createSelector(getStudies, sSelectors.selectEntities)
+const getPEntities = createSelector(getProcs, pSelectors.selectEntities)
+
 export const getItem = (id: string) => createSelector(getStudies, s => {
   console.log(`get item ${id}`);
   return sSelectors.selectEntities(s)[id]
 })
 //same behavior
 export const getItem1 = (id: string) => createSelector(getSEntities, s => {
-  console.log(`get item entity ${id}`);
+  console.log(`get study entity ${id}`);
+  return s[id]
+})
+export const getProc = (id: string) => createSelector(getPEntities, s => {
+  console.log(`get proc entity ${id}`);
   return s[id]
 })
 
+export const getItemFull0 = (id: string) => {
+  const fac = toFull()
 
+  return createSelector(getSEntities, getPEntities, (s, p) => {
+    console.log(`get item full ${id}`);
+    const study = s[id]
+    const proc = p[id]
+    const item: ReqProcFull = fac(study, proc)
+    return item;
+  })
+}
+
+const toFull = ()=>defaultMemoize((study, proc) => ({ study, proc})).memoized
+
+export const getItemFull = (id: string) => createSelector(getItem1(id), getProc(id), (study, proc) => ({ study, proc }))
