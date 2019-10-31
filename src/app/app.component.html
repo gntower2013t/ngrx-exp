@@ -16,6 +16,7 @@
     <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
   </li>
 </ul> -->
+<p>{{ check() }}</p>
 
 <div>
   <a [routerLink]="[ '/c1' ]">component1</a><br>
@@ -29,3 +30,9 @@ outlet:
 <div>
   <router-outlet></router-outlet>
 </div>
+
+<br>
+<app-btn-wrapper></app-btn-wrapper>
+<br><br>
+patient history panel:
+<app-panel></app-panel>

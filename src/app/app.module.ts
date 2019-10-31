@@ -8,14 +8,22 @@ import { counterReducer } from './+state/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { MyCounterComponent } from './my-counter/my-counter.component';
+import { PatientHistoryModule } from './patient-history/patient-history.module';
+import { ButtonsComponent } from './buttons/buttons.component';
+import { FormsModule } from '@angular/forms';
+import { BtnWrapperComponent } from './btn-wrapper/btn-wrapper.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MyCounterComponent
+    MyCounterComponent,
+    ButtonsComponent,
+    BtnWrapperComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    PatientHistoryModule,
     AppRoutingModule,
 
     StoreModule.forRoot({ count: counterReducer }, {

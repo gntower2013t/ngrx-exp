@@ -8,4 +8,12 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 })
 export class AppComponent {
   title = 'ngrx-exp';
+
+  ngDoCheck() {
+    // console.log(`check AppComponent`);
+  }
+
+  check() {
+    console.warn('root view checked');
+  }
 }

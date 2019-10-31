@@ -1,0 +1,13 @@
+<p>
+  panel title
+</p>
+
+items:
+<app-item *ngFor="let id of itemIds$ | async" [id]="id"></app-item>
+
+<!-- <br><br> -->
+<!-- items2:
+<app-item *ngFor="let id of items"></app-item> -->
+
+<p>{{check()}}</p>
+

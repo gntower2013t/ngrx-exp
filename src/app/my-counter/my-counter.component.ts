@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, EMPTY, pipe } from 'rxjs';
-import { map, tap, withLatestFrom } from 'rxjs/operators';
+import { map, tap, withLatestFrom, distinctUntilChanged } from 'rxjs/operators';
 
 import { Store, select } from '@ngrx/store';
-import { increment, decrement, reset, getCntWId, toId, getCntWIdFac } from '../+state/reducers';
+import { increment, decrement, reset, getCntWId, toId, getCntWIdFac, getCounter } from '../+state/reducers';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -17,8 +17,10 @@ export class MyCounterComponent implements OnInit {
 
   count$: Observable<string>;
   count2$: Observable<string>;
+  cnt$: Observable<string|number>;
   id$: Observable<string>;
   name$: Observable<string>;
+  rand:number
 
   constructor(private store: Store<{ count: number }>,
     private route: ActivatedRoute
@@ -35,19 +37,40 @@ export class MyCounterComponent implements OnInit {
 
     this.count$ =
       store.pipe(
+        // tap(x=>console.log("tap counters tate")),
         withLatestFrom(this.id$, (state, id) => getCntWId(state, id)),
+        distinctUntilChanged(),
+        tap(x=>console.log("tap counter with id: " + x))
     )
 
     this.count2$ =
       store.pipe(
         withLatestFrom(this.id$),
-        map(([state, id]) => getCntWId(state, id) + " - another")
+        map(([state, id]) => getCntWId(state, id) + " - another"),
+        distinctUntilChanged() //needed to avoid change detection
+    )
+
+    this.cnt$ = store.pipe(
+      tap(_ => {
+        this.rand = Math.random()
+        console.log(`rand: ${this.rand}`);
+      }),
+      select(getCntWId, 'a') //select can distinct by default
+      // map(getCounter)
     )
 
   }
 
   ngOnInit(): void {
 
+  }
+
+  ngDoCheck() {
+    // console.log(`check MyCounterComponent`);
+  }
+
+  check() {
+    console.warn('counter view checked');
   }
 
   increment() {

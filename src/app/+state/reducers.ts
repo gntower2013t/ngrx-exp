@@ -5,7 +5,7 @@ export const decrement = createAction('[Counter Component] Decrement');
 export const reset = createAction('[Counter Component] Reset');
 
 //purpose ?? only internal??
-const add = createAction('[counter] add', { _as: "props", _p: { add: 5 } })
+export const add = createAction('[counter] add', { _as: "props", _p: { add: 5 } })
 const action = add({ add: 3 })
 console.log(action.add); //3
 
@@ -52,7 +52,7 @@ createEffect(() => action$.pipe(ofType(add),
 
 
 /** ============= selectors ================ */
-const getCounter = createFeatureSelector<AppState, number>('count')
+export const getCounter = createFeatureSelector<AppState, number>('count')
 
 export const getCntWP = createSelector(getCounter, (cnt, props) => {
   console.log(`test memoized ${cnt}`);
