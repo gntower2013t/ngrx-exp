@@ -1,4 +1,6 @@
 buttons: <br>
+<button id="resetcnt" (click)="resetCnt()">Reset Counter</button> <br>
+
 <button id="dummy" (click)="0">dummy</button>
 <button id="timeout" (click)="tm()">time out</button>
 <button id="timeout2" (click)="tm2()">time out2</button><br>
@@ -9,4 +11,4 @@ buttons: <br>
 <button id="add" (click)="add()">add studies</button> <input type="text" [(ngModel)]="id"><br>
 <button id="update" (click)="set()">update studies</button> <input type="text" [(ngModel)]="id"><input type="text" [(ngModel)]="nn"><br>
 
-<p>{{ check()}}</p>
+<!-- <p>{{ check()}}</p> -->

@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { studyLoaded, addStudy, setImg, reload } from '../+state/history.reducer';
-import { add } from '../+state/reducers';
+import { add, reset } from '../+state/reducers';
 
 @Component({
   selector: 'app-buttons',
@@ -65,6 +65,10 @@ export class ButtonsComponent implements OnInit {
   }
   set() {
     this.store.dispatch(setImg([this.id, this.nn]))
+  }
+
+  resetCnt() {
+    this.store.dispatch(reset());
   }
 
 }

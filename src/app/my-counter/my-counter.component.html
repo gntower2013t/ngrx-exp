@@ -1,5 +1,4 @@
-<div>id: {{ id$ | async }} {{ name$ | async }} </div>
-<br>
+<div>{{mark}}: {{ id$ | async }} {{ name$ | async }} </div>
 
 <button id="increment" (click)="increment()">Increment</button>
 
@@ -7,7 +6,7 @@
 <div>random: {{ rand }}</div>
 
 <div>Current Count: {{ count$ | async }}</div>
-<div>Current Count2: {{ count2$ | async }}</div>
+<!-- <div>Current Count2: {{ count2$ | async }}</div> -->
 
 <button id="decrement" (click)="decrement()">Decrement</button>
 
