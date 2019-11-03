@@ -3,6 +3,10 @@
 </p>
 
 items:
+<!-- without trackBy, component will recreated everytime -->
+<!-- <app-item *ngFor="let it of items$ | async; trackBy:trackByItems" [item]="it"></app-item> -->
+
+<!-- primitive don't need trackby -->
 <app-item *ngFor="let id of itemIds$ | async" [id]="id"></app-item>
 
 <!-- <br><br> -->
@@ -10,4 +14,3 @@ items:
 <app-item *ngFor="let id of items"></app-item> -->
 
 <p>{{check()}}</p>
-

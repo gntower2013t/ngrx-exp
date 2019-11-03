@@ -68,17 +68,19 @@ export const getIds = createSelector(getStudies, sSelectors.selectIds)
 const getSEntities = createSelector(getStudies, sSelectors.selectEntities)
 const getPEntities = createSelector(getProcs, pSelectors.selectEntities)
 
+export const getAllStudies = createSelector(getStudies, sSelectors.selectAll)
+
 export const getItem = (id: string) => createSelector(getStudies, s => {
   console.log(`get item ${id}`);
   return sSelectors.selectEntities(s)[id]
 })
 //same behavior
 export const getItem1 = (id: string) => createSelector(getSEntities, s => {
-  console.log(`get study entity ${id}`);
+  // console.log(`get study entity ${id}`);
   return s[id]
 })
 export const getProc = (id: string) => createSelector(getPEntities, s => {
-  console.log(`get proc entity ${id}`);
+  // console.log(`get proc entity ${id}`);
   return s[id]
 })
 
@@ -96,4 +98,8 @@ export const getItemFull0 = (id: string) => {
 
 const toFull = ()=>defaultMemoize((study, proc) => ({ study, proc})).memoized
 
-export const getItemFull = (id: string) => createSelector(getItem1(id), getProc(id), (study, proc) => ({ study, proc }))
+export const getItemFull = (id: string) => createSelector(getItem1(id), getProc(id),
+  (study, proc) => {
+    console.log(`compose ${id}`);
+    return { study, proc }
+  })
